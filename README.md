@@ -23,12 +23,6 @@ MIT License © 2025 Boris
 
 ---
 
-## 🤝 Contributing
-
-Want to help improve Leaf OS? Feel free to fork, submit issues, or open pull requests!
-
----
-
 ## 📬 Contact
 
 Questions, ideas, or feedback? 
