@@ -38,6 +38,12 @@
             </div>
 
             <div class="card">
+                <h2>🧪 LEAF OS Demo</h2>
+                <p>Ervaar Leaf OS zonder installatie op de PC</p>
+                <a class="download-btn" href="downloads/leafos-demo.zip" onclick="openDemoInfo(event)">Download Demo</a>
+            </div>
+
+            <div class="card">
                 <h2>🖼 Wallpapers</h2>
                 <p>Set van HD wallpapers voor desktop en mobiel</p>
                 <a class="download-btn" href="downloads/wallpapers.zip" download>Download Wallpapers</a>
@@ -45,26 +51,44 @@
 
             <div class="card">
                 <h2>🌿 Logo's</h2>
-                <p>Officiële logo's in PNG formaat</p>
+                <p>Officiële logo's en iconen in PNG formaat</p>
                 <a class="download-btn" href="downloads/leafos-logos.zip" download>Download Logo's</a>
             </div>
+        </div>
+
+        <!-- BAM! Uitleg komt meteen in beeld -->
+        <div id="demo-info" style="display: none; text-align: center; margin: 4rem auto; max-width: 600px; background-color: #f0f4f8; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <h3>LEAF OS Demo – Uitleg</h3>
+            <p>Bedankt voor het downloaden van de demo! 🎉</p>
+            <ul style="text-align: left;">
+                <li>Pak het ZIP-bestand uit op je computer</li>
+                <li>Open het bestand <strong>LEAF OS Demo.html</strong> in je browser</li>
+                <li>De demo heeft geen tijdslimiet – gebruik hem zolang je wilt!</li>
+            </ul>
         </div>
     </main>
 
     <footer>
         &copy; 2025 Leaf OS – Gemaakt door Boris de Bruin.
     </footer>
+
     <div id="toast">Leaf OS is nog niet beschikbaar voor download.</div>
+
     <script>
         function showToast() {
             const toast = document.getElementById('toast');
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 4000); // verdwijnt na 4 seconden
+            }, 4000);
+        }
+
+        function openDemoInfo(event) {
+            event.preventDefault();
+            document.getElementById('demo-info').style.display = 'block';
+            window.location.href = 'downloads/LEAFOS-Demo.zip';
         }
     </script>
-
 </body>
 
 </html>
