@@ -4,14 +4,89 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Over Leaf OS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Leaf OS - Over</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Lightbox styling in Leaf OS stijl */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-overlay img {
+      max-width: 90%;
+      max-height: 85vh;
+      box-shadow: 0 0 40px rgba(255,255,255,0.3);
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox-overlay .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      font-family: Inter, sans-serif;
+    }
+
+    @media (max-width: 600px) {
+      .lightbox-overlay img {
+        max-width: 95%;
+        max-height: 70vh;
+      }
+      .lightbox-overlay .close-btn {
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+      }
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .gallery,
+    .logo-display {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .gallery img,
+    .logo-display img {
+      max-width: 200px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    .gallery img:hover,
+    .logo-display img:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="Logo.png" alt="Leaf OS logo" />
+      <img src="Logo.png" alt="Leaf OS logo">
       <span>Leaf OS</span>
     </div>
     <nav>
@@ -24,35 +99,67 @@
     </nav>
   </header>
 
-  <main>
-    <h1>Wat is Leaf OS?</h1>
-    <p>
-      Leaf OS is een lichtgewicht besturingssysteem dat gebouwd is met eenvoud en duurzaamheid in gedachten.
-      Ontwikkeld door <strong>Boris de Bruin</strong> in 2025, biedt Leaf OS een snelle, gestroomlijnde ervaring die perfect is voor moderne gebruikers.
-    </p>
+  <main class="home-hero">
+    <div class="hero-text">
+      <h1>Over <span class="leaf-name">Leaf OS</span></h1>
+      <p>
+        Leaf OS is een lichtgewicht besturingssysteem dat gebouwd is met eenvoud en duurzaamheid in gedachten.<br>
+        Ontwikkeld door <strong>Boris de Bruin</strong> op 15-jarige leeftijd in 2025.
+        Leaf OS biedt een snelle,
+        gestroomlijnde ervaring die perfect is voor moderne gebruikers.
+      </p>
+    </div>
+    <div class="hero-image">
+      <img src="images/logo.png" alt="Leaf OS logo">
+    </div>
+  </main>
 
-    <h2>Waarom Leaf OS?</h2>
-    <ul class="features">
-      <li>🌿 Milieuvriendelijk: energiezuinig en licht op oudere hardware</li>
-      <li>⚡ Supersnel opstarten en responsieve prestaties</li>
-      <li>🧘 Eenvoudige en schone gebruikersinterface</li>
-    </ul>
+  <section class="content-section">
+    <h2>LEAF OS Demo</h2>
+    <div class="gallery">
+      <a href="images/Demo 1.png" class="lightbox-link"><img src="images/Demo 1.png" alt="Demo 1" /></a>
+      <a href="images/Demo 2.png" class="lightbox-link"><img src="images/Demo 2.png" alt="Demo 2" /></a>
+      <a href="images/Demo 3.png" class="lightbox-link"><img src="images/Demo 3.png" alt="Demo 3" /></a>
+    </div>
 
     <h2>Screenshots</h2>
     <div class="gallery">
-      <img src="images/Bureaublad 1.png" alt="Bureaublad 1" />
-      <img src="images/Bureaublad 2.png" alt="Bureaublad 2" />
-      <img src="images/Bureaublad 3.png" alt="Bureaublad 3" />
+      <a href="images/Bureaublad 1.png" class="lightbox-link"><img src="images/Bureaublad 1.png" alt="Bureaublad 1" /></a>
+      <a href="images/Bureaublad 2.png" class="lightbox-link"><img src="images/Bureaublad 2.png" alt="Bureaublad 2" /></a>
+      <a href="images/Bureaublad 3.png" class="lightbox-link"><img src="images/Bureaublad 3.png" alt="Bureaublad 3" /></a>
     </div>
 
     <h2>Logo ontwerp</h2>
     <div class="logo-display">
-      <img src="images/logo 2.png" alt="Leaf OS alternatief logo" />
+      <a href="images/logo 2.png" class="lightbox-link"><img src="images/logo 2.png" alt="Leaf OS alternatief logo" /></a>
     </div>
-  </main>
+  </section>
 
   <footer>
-    &copy; 2025 Leaf OS – Gemaakt door Boris de Bruin.
+    &copy; 2025 Leaf OS – Alle rechten voorbehouden.
   </footer>
+
+  <script>
+    document.querySelectorAll('.lightbox-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const src = this.getAttribute('href');
+
+        const overlay = document.createElement('div');
+        overlay.classList.add('lightbox-overlay');
+        overlay.innerHTML = `
+          <span class="close-btn" onclick="this.parentElement.remove()">×</span>
+          <img src="${src}" alt="Leaf OS afbeelding">
+        `;
+
+        // Sluit bij klik buiten afbeelding
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) overlay.remove();
+        });
+
+        document.body.appendChild(overlay);
+      });
+    });
+  </script>
 </body>
 </html>
