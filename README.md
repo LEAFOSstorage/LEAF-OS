@@ -1,6 +1,6 @@
 # Leaf OS by Boris de Bruin
 
-Leaf OS is a lightweight, custom Linux-based operating system designed for speed, simplicity, and local control.
+Leaf OS is a lightweight operating system designed for speed, simplicity, and local control.
 
 ## 🚀 Features
 
