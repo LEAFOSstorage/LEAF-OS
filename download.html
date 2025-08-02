@@ -40,7 +40,7 @@
             <div class="card">
                 <h2>💻 LEAF OS Preview</h2>
                 <p>Ervaar Leaf OS zonder installatie op de PC</p>
-                <a class="download-btn" href="downloads/LEAFOS-Preview.zip" onclick="openDemoInfo(event)">Download Preview</a>
+                <a class="download-btn" href="downloads/LEAFOS-Preview.zip" download>Download Preview</a>
             </div>
 
             <div class="card">
@@ -64,12 +64,12 @@
 
         <!-- BAM! Uitleg komt meteen in beeld -->
         <div id="demo-info" style="display: none; text-align: center; margin: 4rem auto; max-width: 600px; background-color: #f0f4f8; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-            <h3>LEAF OS Demo/Preview – Uitleg</h3>
-            <p>Bedankt voor het downloaden van de demo of de Preview! 🎉</p>
+            <h3>LEAF OS Demo – Uitleg</h3>
+            <p>Bedankt voor het downloaden van de demo! 🎉</p>
             <ul style="text-align: left;">
                 <li>Pak het ZIP-bestand uit op je computer</li>
-                <li>Open het bestand <strong>LEAF OS Demo.html</strong><strong>LEAF OS Preview.html</strong> in je browser</li>
-                <li>De Demo en Preview heeft geen tijdslimiet – gebruik hem zolang je wilt!</li>
+                <li>Open het bestand <strong>LEAF OS Demo.html</strong> in je browser</li>
+                <li>De demo heeft geen tijdslimiet – gebruik hem zolang je wilt!</li>
             </ul>
         </div>
     </main>
@@ -92,12 +92,13 @@
         function openDemoInfo(event) {
             event.preventDefault();
             document.getElementById('demo-info').style.display = 'block';
-            window.location.href = 'downloads/LEAFOS-Demo.zip';
+            window.location.href = 'downloads/LEAFOS-Preview.zip';
         }
     </script>
 </body>
 
 </html>
+
 
 
 
