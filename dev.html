@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaf OS Dev Downloads</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leaf-green: #2e7d32;
+            --leaf-light: #f0f4f8;
+            --leaf-dark: #1b5e20;
+            --text-color: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--leaf-light);
+            color: var(--text-color);
+        }
+
+        #login-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(240, 244, 248, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h2 {
+            margin-bottom: 1rem;
+            color: var(--leaf-green);
+        }
+
+        .login-box input {
+            padding: 0.6rem;
+            width: 80%;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .login-box button {
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            background-color: var(--leaf-green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background-color: var(--leaf-dark);
+        }
+
+        #downloads {
+            display: none;
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        #downloads h1 {
+            color: var(--leaf-green);
+            margin-bottom: 2rem;
+        }
+
+        .download-item {
+            background: white;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-item a {
+            text-decoration: none;
+            color: var(--leaf-green);
+            font-weight: bold;
+        }
+
+        .download-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-overlay">
+        <div class="login-box">
+            <h2>🔐 Dev toegang</h2>
+            <p>Voer wachtwoord in:</p>
+            <input type="password" id="dev-pass" placeholder="Wachtwoord">
+            <br>
+            <button onclick="verify()">Ontgrendel</button>
+        </div>
+    </div>
+
+    <div id="downloads">
+        <h1>Leaf OS Dev Portaal</h1>
+        <div class="download-item">
+            <span>⬇ Leaf OS v1.0 ISO</span>
+            <a href="downloads/leafos-v1.iso">Download</a>
+        </div>
+
+        <div class="download-item">
+            <span>💻 Leaf OS Preview</span>
+            <a href="downloads/LEAFOS-Preview.zip">Download</a>
+        </div>
+
+        <div class="download-item">
+            <span>🧪 Leaf OS Demo</span>
+            <a href="downloads/LEAFOS-Demo.zip">Download</a>
+        </div>
+
+        <div class="download-item">
+            <span>🖼 Wallpapers</span>
+            <a href="downloads/wallpapers.zip">Download</a>
+        </div>
+
+        <div class="download-item">
+            <span>🌿 Logo's & Icons</span>
+            <a href="downloads/leafos-logos.zip">Download</a>
+        </div>
+    </div>
+
+    <script>
+        const correctPassword = "LEAFOSiRIS";
+
+        function verify() {
+            const input = document.getElementById("dev-pass").value;
+            if (input === correctPassword) {
+                document.getElementById("login-overlay").style.display = "none";
+                document.getElementById("downloads").style.display = "block";
+            } else {
+                alert("Ongeldig wachtwoord.");
+            }
+        }
+    </script>
+</body>
+</html>
