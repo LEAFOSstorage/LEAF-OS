@@ -8,15 +8,112 @@
     <title>Download Leaf OS</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Lightbox specifieke stijlen - Zorgt ervoor dat de lightbox in het midden staat */
+        .lightbox-overlay {
+            display: none; /* Standaard verborgen */
+            position: fixed; /* Cruciaal: positioneert t.o.v. de viewport */
+            top: 0; /* Zorgt dat het bovenaan de viewport begint */
+            left: 0; /* Zorgt dat het links van de viewport begint */
+            width: 100%; /* Zorgt dat het de hele breedte van de viewport beslaat */
+            height: 100%; /* Zorgt dat het de hele hoogte van de viewport beslaat */
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparante zwarte achtergrond */
+            display: flex; /* Maakt van de overlay een flex-container */
+            align-items: center; /* Centreert de inhoud verticaal */
+            justify-content: center; /* Centreert de inhoud horizontaal */
+            z-index: 1000; /* Zorgt dat het bovenop andere elementen ligt */
+            opacity: 0; /* Start onzichtbaar voor de overgang */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            transform: translateY(-20px) scale(0.95); /* Start iets verschoven en kleiner */
+            opacity: 0; /* Start onzichtbaar */
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .lightbox-overlay.active .lightbox-content {
+            transform: translateY(0) scale(1); /* Animeer naar het midden en volledige grootte */
+            opacity: 1;
+        }
+
+        .lightbox-content h3 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        .lightbox-content .version-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .lightbox-content .version-buttons a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .lightbox-content .version-buttons a:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #888;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .lightbox-close-btn:hover {
+            color: #333;
+        }
+
+        /* Responsive aanpassingen voor de lightbox */
+        @media (max-width: 768px) {
+            .lightbox-content {
+                padding: 1.5rem;
+            }
+            .lightbox-content h3 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XTJ6WJKG5V"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-XTJ6WJKG5V');
+    gtag('config', 'G-XTJ6WJKG5V');
 </script>
 <body>
     <header>
@@ -42,7 +139,8 @@
             <div class="card">
                 <h2>⬇ Leaf OS v1.2</h2>
                 <p>De volledige LEAF OS applicatie v1.2</p>
-                <a class="download-btn" href="downloads/LEAF OS V1.2.zip" download>Download LEAF OS</a>
+                <!-- Deze knop opent nu de lightbox -->
+                <a class="download-btn" id="open-lightbox-btn" href="#">Download LEAF OS</a>
             </div>
             
             <div class="card">
@@ -88,6 +186,18 @@
 
     <div id="toast">Leaf OS is nog niet beschikbaar voor download.</div>
 
+    <!-- Lightbox HTML Structuur -->
+    <div id="download-lightbox-overlay" class="lightbox-overlay">
+        <div id="download-lightbox" class="lightbox-content">
+            <button class="lightbox-close-btn" id="close-lightbox-btn">&times;</button>
+            <h3>Kies je Leaf OS versie</h3>
+            <div class="version-buttons">
+                <a href="downloads/LEAF OS V1.2.zip" download>Download v1.2 (Alleen Windows)</a>
+                <a href="downloads/LEAF OS V1.1.zip" download>Download v1.1</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         function showToast() {
             const toast = document.getElementById('toast');
@@ -102,16 +212,49 @@
             document.getElementById('demo-info').style.display = 'block';
             window.location.href = 'downloads/LEAFOS-Demo.zip';
         }
+
+        // Lightbox JavaScript functionaliteit
+        const openLightboxBtn = document.getElementById('open-lightbox-btn');
+        const closeLightboxBtn = document.getElementById('close-lightbox-btn');
+        const lightboxOverlay = document.getElementById('download-lightbox-overlay');
+        const lightboxContent = document.getElementById('download-lightbox');
+
+        function openLightbox(event) {
+            event.preventDefault(); // Voorkomt standaard linkgedrag
+            lightboxOverlay.style.display = 'flex'; // Maakt het zichtbaar
+            // Voeg 'active' class toe na een kleine vertraging om de display-wijziging te laten registreren
+            setTimeout(() => {
+                lightboxOverlay.classList.add('active');
+            }, 10); 
+        }
+
+        function closeLightbox() {
+            lightboxOverlay.classList.remove('active'); // Start fade-out animatie
+            // Verberg na voltooiing van de overgang
+            setTimeout(() => {
+                lightboxOverlay.style.display = 'none';
+            }, 300); // Zorg dat deze duur overeenkomt met de CSS overgangsduur
+        }
+
+        // Event Listeners voor Lightbox
+        openLightboxBtn.addEventListener('click', openLightbox);
+        closeLightboxBtn.addEventListener('click', closeLightbox);
+
+        // Sluit lightbox wanneer er buiten de inhoud wordt geklikt
+        lightboxOverlay.addEventListener('click', (event) => {
+            if (event.target === lightboxOverlay) {
+                closeLightbox();
+            }
+        });
+
+        // Sluit lightbox met de Escape-toets
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
